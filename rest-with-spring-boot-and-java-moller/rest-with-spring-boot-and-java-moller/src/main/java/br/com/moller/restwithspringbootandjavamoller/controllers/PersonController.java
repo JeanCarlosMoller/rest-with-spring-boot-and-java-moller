@@ -25,7 +25,7 @@ public class PersonController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
     public Person findById(
-            @PathVariable(value = "id") String id) throws Exception {
+            @PathVariable(value = "id") Long id) throws Exception {
 
         return service.findById(id);
     }
@@ -46,7 +46,7 @@ public class PersonController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(
-            @PathVariable(value = "id") String id) {
+            @PathVariable(value = "id") Long id) {
 
         service.delete(id);
     }
