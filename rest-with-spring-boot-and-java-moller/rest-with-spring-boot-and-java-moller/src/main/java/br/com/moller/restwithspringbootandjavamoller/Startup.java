@@ -1,9 +1,8 @@
 package br.com.moller.restwithspringbootandjavamoller;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import static org.springframework.boot.SpringApplication.*;
+import static org.springframework.boot.SpringApplication.run;
 
 @SpringBootApplication
 public class Startup {
