@@ -4,9 +4,9 @@ import java.util.List;
 
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v1.PersonVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import br.com.moller.restwithspringbootandjavamoller.model.Person;
 import br.com.moller.restwithspringbootandjavamoller.services.PersonServices;
 
 @RestController
@@ -21,12 +21,11 @@ public class PersonController {
         return service.findAll();
     }
 
-    @GetMapping(value = "/{id}", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-    public PersonVOfindById(
-            @PathVariable(value = "id") Long id) throws Exception {
-
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public PersonVO findById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
     }
+
 
     @PostMapping( consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
     public PersonVO create(
