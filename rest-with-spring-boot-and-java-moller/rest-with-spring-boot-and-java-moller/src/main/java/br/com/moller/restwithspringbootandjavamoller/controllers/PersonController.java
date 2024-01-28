@@ -1,7 +1,6 @@
 package br.com.moller.restwithspringbootandjavamoller.controllers;
 
 import java.util.List;
-
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v1.PersonVO;
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v2.PersonVOV2;
 import org.springframework.beans.factory.annotation.Autowired;

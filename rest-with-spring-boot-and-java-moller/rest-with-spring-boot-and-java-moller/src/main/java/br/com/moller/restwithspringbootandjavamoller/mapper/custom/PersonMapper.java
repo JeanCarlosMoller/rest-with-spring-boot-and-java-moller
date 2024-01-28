@@ -1,6 +1,5 @@
 package br.com.moller.restwithspringbootandjavamoller.mapper.custom;
 
-
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v2.PersonVOV2;
 import br.com.moller.restwithspringbootandjavamoller.model.Person;
 import org.springframework.stereotype.Service;
