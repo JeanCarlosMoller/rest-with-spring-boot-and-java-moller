@@ -34,6 +34,13 @@ public class PersonController {
         return service.create(person);
     }
 
+    @PostMapping(value = "/v2", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    public PersonVOV2 createV2(
+            @RequestBody PersonVOV2 person) {
+
+        return service.createV2(person);
+    }
+
     @PutMapping(consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
     public PersonVO uptada(
             @RequestBody PersonVO person) {
