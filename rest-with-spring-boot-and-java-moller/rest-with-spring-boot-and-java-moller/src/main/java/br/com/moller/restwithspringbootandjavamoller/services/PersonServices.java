@@ -1,11 +1,12 @@
 package br.com.moller.restwithspringbootandjavamoller.services;
 
-
 import java.util.List;
 import java.util.logging.Logger;
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v1.PersonVO;
+import br.com.moller.restwithspringbootandjavamoller.data.vo.v2.PersonVOV2;
 import br.com.moller.restwithspringbootandjavamoller.exceptions.ResourceNotFoundException;
 import br.com.moller.restwithspringbootandjavamoller.mapper.DozerMapper;
+import br.com.moller.restwithspringbootandjavamoller.mapper.custom.PersonMapper;
 import br.com.moller.restwithspringbootandjavamoller.model.Person;
 import br.com.moller.restwithspringbootandjavamoller.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+
+    @Autowired
+    PersonMapper mapper;
 
     public List<PersonVO> findAll() {
 
@@ -46,8 +50,8 @@ public class PersonServices {
     public PersonVOV2 createV2(PersonVOV2 person) {
 
         logger.info("Creating one person with V2!");
-        var entity = DozerMapper.parceObject(person, Person.class);
-        var vo =  DozerMapper.parceObject(repository.save(entity), PersonVOV2.class);
+        var entity = mapper.convertVoToEnity(person);
+        var vo =  mapper.convertEnityToVo(repository.save(entity));
         return vo;
     }
 

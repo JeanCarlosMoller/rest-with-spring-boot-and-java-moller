@@ -1,8 +1,8 @@
 package br.com.moller.restwithspringbootandjavamoller.controllers;
 
 import java.util.List;
-
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v1.PersonVO;
+import br.com.moller.restwithspringbootandjavamoller.data.vo.v2.PersonVOV2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import br.com.moller.restwithspringbootandjavamoller.services.PersonServices;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
 
     @Autowired
