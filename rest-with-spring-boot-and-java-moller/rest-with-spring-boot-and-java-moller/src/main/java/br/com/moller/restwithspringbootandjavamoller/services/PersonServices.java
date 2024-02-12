@@ -2,6 +2,8 @@ package br.com.moller.restwithspringbootandjavamoller.services;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import br.com.moller.restwithspringbootandjavamoller.controllers.PersonController;
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v1.PersonVO;
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v2.PersonVOV2;
 import br.com.moller.restwithspringbootandjavamoller.exceptions.ResourceNotFoundException;
@@ -10,6 +12,8 @@ import br.com.moller.restwithspringbootandjavamoller.mapper.custom.PersonMapper;
 import br.com.moller.restwithspringbootandjavamoller.model.Person;
 import br.com.moller.restwithspringbootandjavamoller.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,7 +40,9 @@ public class PersonServices {
 
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-        return DozerMapper.parceObject(entity, PersonVO.class);
+        PersonVO vo =  DozerMapper.parceObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+        return vo;
     }
 
     public PersonVO create(PersonVO person) {
@@ -59,7 +65,7 @@ public class PersonServices {
 
         logger.info("Updating one person!");
 
-        var entity = repository.findById(person.getId())
+        var entity = repository.findById(person.getKey())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
         entity.setFirstName(person.getFirstName());
