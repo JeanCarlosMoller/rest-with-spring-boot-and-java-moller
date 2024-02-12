@@ -1,5 +1,8 @@
 package br.com.moller.restwithspringbootandjavamoller.data.vo.v1;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import org.springframework.hateoas.RepresentationModel;
 
@@ -11,9 +14,15 @@ public class PersonVO extends RepresentationModel<PersonVO> implements Serializa
     private static final long serialVersionUID = 1L;
 
     private long key;
+
+    @JsonProperty("first_Name")
     private String firstName;
+
+    @JsonProperty("last_Name")
     private String lastName;
     private String address;
+
+    @JsonIgnore
     private String gender;
 
     public PersonVO() {
