@@ -2,7 +2,6 @@ package br.com.moller.restwithspringbootandjavamoller.data.vo.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.persistence.*;
 import org.springframework.hateoas.RepresentationModel;
 import com.github.dozermapper.core.Mapping;
 
@@ -15,9 +14,8 @@ public class PersonVO extends RepresentationModel<PersonVO> implements Serializa
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("id")
-
+    @Mapping("id")
     private long key;
-
     private String firstName;
     private String lastName;
     private String address;
