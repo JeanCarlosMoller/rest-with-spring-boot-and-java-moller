@@ -16,6 +16,7 @@ public class PersonVO extends RepresentationModel<PersonVO> implements Serializa
     @JsonProperty("id")
     @Mapping("id")
     private long key;
+
     private String firstName;
     private String lastName;
     private String address;
