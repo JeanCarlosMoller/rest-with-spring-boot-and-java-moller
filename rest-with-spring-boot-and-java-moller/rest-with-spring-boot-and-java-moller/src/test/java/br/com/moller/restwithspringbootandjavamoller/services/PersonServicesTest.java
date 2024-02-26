@@ -2,6 +2,7 @@ package br.com.moller.restwithspringbootandjavamoller.services;
 
 import br.com.moller.mapper.mocks.MockPerson;
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v1.PersonVO;
+import br.com.moller.restwithspringbootandjavamoller.exceptions.RequiredObjectIsNullException;
 import br.com.moller.restwithspringbootandjavamoller.model.Person;
 import br.com.moller.restwithspringbootandjavamoller.repositories.PersonRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -132,6 +133,28 @@ class PersonServicesTest {
     }
 
     @Test
+    void createWithNullPerson() {
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
+            service.create(null);
+        });
+        String expectedMessage = "It is not allowed to persist a null object!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
+
+    @Test
+    void updateWithNullPerson() {
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
+            service.update(null);
+        });
+        String expectedMessage = "It is not allowed to persist a null object!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
+
+    @Test
     void update() {
         Person entity = input.mockEntity(1);
 
@@ -140,7 +163,6 @@ class PersonServicesTest {
 
         PersonVO vo = input.mockVO(1);
         vo.setKey(1L);
-
 
         when(repository.findById(1L)).thenReturn(Optional.of(entity));
         when(repository.save(entity)).thenReturn(persisted);

@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import br.com.moller.restwithspringbootandjavamoller.controllers.PersonController;
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v1.PersonVO;
 import br.com.moller.restwithspringbootandjavamoller.data.vo.v2.PersonVOV2;
+import br.com.moller.restwithspringbootandjavamoller.exceptions.RequiredObjectIsNullException;
 import br.com.moller.restwithspringbootandjavamoller.exceptions.ResourceNotFoundException;
 import br.com.moller.restwithspringbootandjavamoller.mapper.DozerMapper;
 import br.com.moller.restwithspringbootandjavamoller.mapper.custom.PersonMapper;
@@ -49,6 +50,8 @@ public class PersonServices {
 
     public PersonVO create(PersonVO person) {
 
+        if(person == null) throw new RequiredObjectIsNullException();
+
         logger.info("Creating one person!");
         var entity = DozerMapper.parceObject(person, Person.class);
         var vo =  DozerMapper.parceObject(repository.save(entity), PersonVO.class);
@@ -58,8 +61,9 @@ public class PersonServices {
 
     public PersonVO update(PersonVO person) {
 
-        logger.info("Updating one person!");
+        if(person == null) throw new RequiredObjectIsNullException();
 
+        logger.info("Updating one person!");
         var entity = repository.findById(person.getKey())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
