@@ -10,4 +10,7 @@ public class TestConfigs {
     public static final String CONTENT_TYPE_JSON = "application/json";
     public static final String CONTENT_TYPE_XML = "application/xml";
     public static final String CONTENT_TYPE_YML = "application/x-yaml";
+
+    public static final String ORIGIN_MOLLER = "https://moller.com.br";
+    public static final String ORIGIN_MOLLERN = "https://mollern.com.br";
 }
