@@ -2,6 +2,7 @@ package br.com.moller.restwithspringbootandjavamoller.exceptions.handler;
 
 import java.util.Date;
 
+import br.com.moller.restwithspringbootandjavamoller.exceptions.InvalidHwtAuthenticationException;
 import br.com.moller.restwithspringbootandjavamoller.exceptions.RequiredObjectIsNullException;
 import br.com.moller.restwithspringbootandjavamoller.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,16 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 request.getDescription(false));
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidHwtAuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleInvalidHwtAuthenticationException(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
     }
 
 }
